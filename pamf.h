@@ -13,50 +13,35 @@
         #include <stdlib.h>
     #endif
 
-    #ifndef __STDARG_H
-        #include <stdarg.h>
+    #ifndef _STRING_H
+        #include <string.h>
     #endif
 
     typedef struct SingleVarPolynomial {
         double *coef;
         uint8_t degree;
-    } single_var_poly_t;
+    } univariate_t;
 
     typedef struct MultiVarTerm {
         double coef;
-        uint8_t vars[3];
-    } multi_var_term_t;
+        uint8_t var[3];
+    } multivar_term_t;
 
     typedef struct MultiVarPoly {
-        struct MultiVarTerm *poly;
-        uint8_t terms;
-    } multi_var_poly_t;
+        multivar_term_t *term;
+        uint8_t size;
+    } multivariate_t;
 
-    /*
-        p_CreateSingleVarPoly - create a simple polygon with only 1 variable (x)
-        degree - the degree of the polynomial, or its highest exponent.
-        Returns a pointer to a polynomial of size (degree + 1)
-    */
-    single_var_poly_t* p_CreateSingleVarPoly(uint8_t degree);
-    
-    /*
-        p_FreeSingleVar - destroy a single-variable polynomial
-    */
-    void p_FreeSingleVar(single_var_poly_t *p);
-    
-    /*
-        p_CreateMultiVarPoly - create a polygon that has maximum of 3 variables
-        terms = the total number of terms in the polynomial, including non-variable constants
-        term1 = a struct containing the coefficient and variable data of the first (highest degree)
+    univariate_t* p_createUni(uint8_t degree);
+    void p_freeUni(univariate_t *p);
 
-        each following (optional) argument is another pointer to a multi_var_term_t struct containing the
-        information for the next term. The first term is mandatory, while others are optional.
+    void p_swapMultiTerms(multivar_term_t *t1, multivar_term_t *t2);
+    uint8_t p_getTermDegree(multivariate_t *p, uint8_t index);
+    int comp(const void *, const void *);
+    void p_sortMulti(multivariate_t *p);
+    multivariate_t* p_createMulti(uint8_t terms);
+    void p_freeMulti(multivariate_t *p);
 
-        the order of terms in the polynomial is alphabetical order by the highest degree.
-        For example, the polynomial 2x^3 + 5x^5y^3 - 4y^4z would be re-written as
-        5x^5y^3 + 2x^3 - 4y^4z
-    */
-    multi_var_poly_t* p_CreateMultiVarPoly(uint8_t terms, multi_var_term_t *term1, ...);
-                                        
+    double p_abs(double x);
 
 #endif
