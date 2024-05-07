@@ -40,19 +40,19 @@ This struct stores a multivariant polynomial. `size` is the total number of term
 ## Implemented functions
 
 ``` univariate_t* p_createUni(uint8_t degree) ```
-Allocate a univariate polynomial with (degree + 1) terms and return its pointer.
+- Allocate a univariate polynomial with (degree + 1) terms and return its pointer.
 
 ```void p_freeUni(univariate_t *p)```
-Destroy a univariate polynomial
+- Destroy a univariate polynomial
 
 ```uint8_t p_getTermDegree(multivariate_t *p, uint8_t index)```
-Find the degree of the multivariate term `p->term[index]`
+- Find the degree of the multivariate term `p->term[index]`
 
 ```void p_sortMulti(multivariate_t *p)```
-Sort a multivariate polynomial. Puts the elements in lowest-to-highest degree order.
+- Sort a multivariate polynomial. Puts the elements in lowest-to-highest degree order.
 
 ```multivariate_t* p_createMulti(uint8_t terms)```
-Allocate a multivariate polynomial with (terms) terms and return its pointer.
+- Allocate a multivariate polynomial with (terms) terms and return its pointer.
 
 ```void p_freeMulti(multivariate_t *p)```
-Destroy a multivariate polynomial
+- Destroy a multivariate polynomial
